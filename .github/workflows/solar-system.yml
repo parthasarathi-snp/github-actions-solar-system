@@ -86,9 +86,25 @@ jobs:
         - name: check container
           run: |
             docker container ls
+
+        - name: Log in to docker registry
+          uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+          with:
+            username: ${{ vars.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_TOKEN }}
+
+        - name: Build and push Docker image to dockerhub
+          #id: push
+          uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+          with:
+            context: .
+            push: true
+            tags: ${{ DOCKER_USERNAME }}/githubactionssolarsystem
+            labels: ${{ github.sha }}
             
      
      
+
 
 
 
