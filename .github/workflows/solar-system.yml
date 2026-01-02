@@ -47,7 +47,29 @@ jobs:
           if: success()
           run: |
             echo "loggedin to gcr"
-          
+
+        - name: Build and push Docker image
+          #id: push
+          uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+          with:
+            context: .
+            push: true
+            tags: ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ sha.id }}
+            #labels: ${{ steps.meta.outputs.labels }}
+
+        - name: image check
+          run: |
+            docker image ls
+
+        - name: test image
+          run: |
+            docker run -d --name my-container ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ sha.id }}
+
+        - name: check container
+          run: |
+            docker container ls
+            
      
      
+
 
