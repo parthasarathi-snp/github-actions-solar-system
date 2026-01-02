@@ -8,20 +8,20 @@ on:
       - 'feature/*'
     
 jobs:
-    unit-testing:
-        name: Unit Testing
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+    # unit-testing:
+    #     name: Unit Testing
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #     - name: Checkout Repository
+    #       uses: actions/checkout@v4
 
-        - name: Setup NodeJS Version
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
+    #     - name: Setup NodeJS Version
+    #       uses: actions/setup-node@v4
+    #       with:
+    #         node-version: 20
     
-        - name: Install Dependencies
-          run: npm install
+    #     - name: Install Dependencies
+    #       run: npm install
     
     #     - name: Unit Testing
     #       run: npm test
@@ -36,6 +36,17 @@ jobs:
       name: build docker image
       runs-on: ubuntu-latest
       steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+
+        - name: Setup NodeJS Version
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+    
+        - name: Install Dependencies
+          run: npm install
+          
         - name: Log in to the Container registry
           uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
           with:
@@ -72,6 +83,7 @@ jobs:
             
      
      
+
 
 
 
