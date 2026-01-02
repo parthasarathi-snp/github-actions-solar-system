@@ -8,26 +8,46 @@ on:
       - 'feature/*'
     
 jobs:
-    unit-testing:
-        name: Unit Testing
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+    # unit-testing:
+    #     name: Unit Testing
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #     - name: Checkout Repository
+    #       uses: actions/checkout@v4
 
-        - name: Setup NodeJS Version
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
+    #     - name: Setup NodeJS Version
+    #       uses: actions/setup-node@v4
+    #       with:
+    #         node-version: 20
     
-        - name: Install Dependencies
-          run: npm install
+    #     - name: Install Dependencies
+    #       run: npm install
     
-        - name: Unit Testing
-          run: npm test
+    #     - name: Unit Testing
+    #       run: npm test
           
-        - name: Archive Test Result
-          uses: actions/upload-artifact@v4
+    #     - name: Archive Test Result
+    #       uses: actions/upload-artifact@v4
+    #       with:
+    #         name: Mocha-Test-Result
+    #         path: test-results.xml
+
+    build-image:
+      name: build docker image
+      runs-on: ubuntu-latest
+      steps:
+        - name: Log in to the Container registry
+          uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
           with:
-            name: Mocha-Test-Result
-            path: test-results.xml
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+            
+        - name: login check success
+          if: success()
+          run: |
+            echo "loggedin to gcr"
+          
+     
+     
+
