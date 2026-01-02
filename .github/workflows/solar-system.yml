@@ -81,7 +81,7 @@ jobs:
 
         - name: test image
           run: |
-            docker run -d --name my-container ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ github.sha }}:myimage1
+            docker run -d --name my-container ghcr.io/parthasarathi/github-actions-solar-system
 
         - name: check container
           run: |
@@ -89,6 +89,7 @@ jobs:
             
      
      
+
 
 
 
