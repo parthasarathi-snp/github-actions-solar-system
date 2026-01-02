@@ -65,9 +65,9 @@ jobs:
           with:
             context: .
             push: true
-            tags: ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ github.sha }}
+            tags: ghcr.io/${{ github.actor }}/github-actions-solar-system
             #tags: ghcr.io/github-actions-solar-system/${{ github.sha }}
-            labels: myimage1
+            labels: ${{ github.sha }}
 
         - name: image check
           run: |
@@ -83,6 +83,7 @@ jobs:
             
      
      
+
 
 
 
