@@ -38,7 +38,7 @@ jobs:
       
       permissions:
             contents: read
-            packages: write, read
+            packages: write
 
       steps:
         - name: Checkout Repository
@@ -107,6 +107,7 @@ jobs:
             
      
      
+
 
 
 
