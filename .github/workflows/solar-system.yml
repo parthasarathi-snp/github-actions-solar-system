@@ -35,6 +35,11 @@ jobs:
     build-image:
       name: build docker image
       runs-on: ubuntu-latest
+      
+      permissions:
+            contents: read
+            packages: write  
+
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -83,6 +88,7 @@ jobs:
             
      
      
+
 
 
 
