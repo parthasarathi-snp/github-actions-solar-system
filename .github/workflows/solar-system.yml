@@ -55,7 +55,7 @@ jobs:
             context: .
             push: true
             tags: ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ github.sha }}
-            #labels: ${{ steps.meta.outputs.labels }}
+            labels: myimage1
 
         - name: image check
           run: |
@@ -63,7 +63,7 @@ jobs:
 
         - name: test image
           run: |
-            docker run -d --name my-container ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ github.sha }}
+            docker run -d --name my-container ghcr.io/${{ github.actor }}/github-actions-solar-system/${{ github.sha }}:myimage1
 
         - name: check container
           run: |
@@ -71,6 +71,7 @@ jobs:
             
      
      
+
 
 
 
