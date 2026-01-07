@@ -122,7 +122,6 @@ jobs:
 
         - name: Verify cluster access
           run: |
-            kubectl version --short
             kubectl get node
 
 
@@ -133,6 +132,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
