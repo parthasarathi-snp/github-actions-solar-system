@@ -121,11 +121,12 @@ jobs:
 
         - name: check config file
           run: |
-            cd /home/${{ USER }}/.kube
+            cd /home/$USER/.kube
             ls -la
 
         - name: check connectivity to cluster
           run: kubectl get no
+
 
 
 
