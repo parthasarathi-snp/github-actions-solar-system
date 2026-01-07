@@ -113,15 +113,15 @@ jobs:
         - name: check kubectl installation and vesion
           run: kubectl version --client
 
-        - name: Gets K8s context
-          uses: azure/aks-set-context@94ccc775c1997a3fcfbfbce3c459fec87e0ab188
+        - name: Set Kubeconfig Context
+          uses: azure/k8s-set-context@v3
           with:
-              creds: ${{ secrets.CLUSTER }}
-              resource-group: "cd-with-actions"
-              cluster-name: "action-cluster"
+            method: kubeconfig
+            kubeconfig: ${{ secrets.CLUSTER }}
 
         - name: check connectivity to cluster
           run: kubectl get no
+
 
 
 
