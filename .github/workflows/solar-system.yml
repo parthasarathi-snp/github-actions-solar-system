@@ -113,19 +113,27 @@ jobs:
         - name: check kubectl installation and vesion
           run: kubectl version --client
 
-        - name: Set Kubeconfig Context
+        
+        - name: Configure Kubeconfig
           uses: azure/k8s-set-context@v3
           with:
             method: kubeconfig
             kubeconfig: ${{ secrets.CLUSTER }}
 
-        - name: check config file
+        - name: Verify cluster access
           run: |
-            cd /home/$USER/.kube
-            ls -la
+            kubectl version --short
+            kubectl get node
 
-        - name: check connectivity to cluster
-          run: kubectl get no
+
+        # - name: check config file
+        #   run: |
+        #     cd /home/$USER/.kube
+        #     ls -la
+
+        # - name: check connectivity to cluster
+        #   run: kubectl get no
+
 
 
 
