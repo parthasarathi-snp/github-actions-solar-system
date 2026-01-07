@@ -119,8 +119,14 @@ jobs:
             method: kubeconfig
             kubeconfig: ${{ secrets.CLUSTER }}
 
+        - name: check config file
+          run: |
+            cd /home/${{ USER }}/.kube
+            ls -la
+
         - name: check connectivity to cluster
           run: kubectl get no
+
 
 
 
