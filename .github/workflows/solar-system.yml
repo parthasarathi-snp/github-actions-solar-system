@@ -36,74 +36,74 @@ jobs:
       name: build docker image
       runs-on: ubuntu-latest
       
-      permissions:
-            contents: read
-            packages: write
+      # permissions:
+      #       contents: read
+      #       packages: write
 
       steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+      #   - name: Checkout Repository
+      #     uses: actions/checkout@v4
 
-        - name: Setup NodeJS Version
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
+      #   - name: Setup NodeJS Version
+      #     uses: actions/setup-node@v4
+      #     with:
+      #       node-version: 20
     
-        - name: Install Dependencies
-          run: npm install
+      #   - name: Install Dependencies
+      #     run: npm install
           
-        - name: Log in to the Container registry
-          uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+      #   - name: Log in to the Container registry
+      #     uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+      #     with:
+      #       registry: ghcr.io
+      #       username: ${{ github.actor }}
+      #       password: ${{ secrets.GITHUB_TOKEN }}
             
-        - name: login check success
-          if: success()
-          run: |
-            echo "loggedin to gcr"
+      #   - name: login check success
+      #     if: success()
+      #     run: |
+      #       echo "loggedin to gcr"
 
-        - name: print username
-          run: echo ${{ github.actor }}
+      #   - name: print username
+      #     run: echo ${{ github.actor }}
 
-        - name: Build and push Docker image
-          #id: push
-          uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-          with:
-            context: .
-            #push: true
-            push: true
-            tags: ghcr.io/${{ github.actor }}/githubactionssolarsystem/${{ github.sha }}
-            #tags: ghcr.io/parthasarathi/github-actions-solar-system
-            labels: ${{ github.sha }}
+      #   - name: Build and push Docker image
+      #     #id: push
+      #     uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+      #     with:
+      #       context: .
+      #       #push: true
+      #       push: true
+      #       tags: ghcr.io/${{ github.actor }}/githubactionssolarsystem/${{ github.sha }}
+      #       #tags: ghcr.io/parthasarathi/github-actions-solar-system
+      #       labels: ${{ github.sha }}
 
-        - name: image check
-          run: |
-            docker image ls
+      #   - name: image check
+      #     run: |
+      #       docker image ls
 
-        - name: test image
-          run: |
-            docker run -d --name my-container ghcr.io/${{ github.actor }}/githubactionssolarsystem/${{ github.sha }}
+      #   - name: test image
+      #     run: |
+      #       docker run -d --name my-container ghcr.io/${{ github.actor }}/githubactionssolarsystem/${{ github.sha }}
 
-        - name: check container
-          run: |
-            docker container ls
+      #   - name: check container
+      #     run: |
+      #       docker container ls
 
-        - name: Log in to docker registry
-          uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-          with:
-            username: ${{ vars.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_TOKEN }}
+      #   - name: Log in to docker registry
+      #     uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+      #     with:
+      #       username: ${{ vars.DOCKER_USERNAME }}
+      #       password: ${{ secrets.DOCKER_TOKEN }}
 
-        - name: Build and push Docker image to dockerhub
-          #id: push
-          uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-          with:
-            context: .
-            push: true
-            tags: ${{ vars.DOCKER_USERNAME }}/githubactionssolarsystem
-            labels: ${{ github.sha }}
+      #   - name: Build and push Docker image to dockerhub
+      #     #id: push
+      #     uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+      #     with:
+      #       context: .
+      #       push: true
+      #       tags: ${{ vars.DOCKER_USERNAME }}/githubactionssolarsystem
+      #       labels: ${{ github.sha }}
 
         - name: install kubectl on server
           uses: azure/setup-kubectl@v4
@@ -132,6 +132,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
