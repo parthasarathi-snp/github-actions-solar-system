@@ -132,7 +132,7 @@ jobs:
           with:
             tokenPrefix: '_{_'
             tokenSuffix: '_}_'
-            files: 'kubernetes/development/*.yaml' # Path to your k8s files
+            files: 'kubernetes/test/*.yaml' # Path to your k8s files
           env:
             NAMESPACE: ${{ vars.ENV }}
             REPLICAS: ${{ vars.REPLICAS }}
@@ -140,7 +140,7 @@ jobs:
 
         - name: check content on rewrite
           run: |
-            cat kubernetes/development/deployment.yaml
+            cat kubernetes/test/deployment.yaml
 
 
 
@@ -151,6 +151,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
