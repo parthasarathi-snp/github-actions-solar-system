@@ -136,6 +136,7 @@ jobs:
           env:
             NAMESPACE: ${{ vars.ENV }}
             REPLICAS: ${{ vars.REPLICAS }}
+            IMAGE: ${{ vars.IMAGE }}
 
         - name: check content on rewrite
           run: |
@@ -150,6 +151,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
