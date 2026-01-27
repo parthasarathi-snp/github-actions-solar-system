@@ -36,9 +36,9 @@ jobs:
       name: build docker image
       runs-on: ubuntu-latest
       
-      # permissions:
-      #       contents: read
-      #       packages: write
+      permissions:
+            contents: write
+            packages: write
 
       steps:
       #   - name: Checkout Repository
@@ -124,6 +124,21 @@ jobs:
           run: |
             kubectl get node
 
+        - name: Replace Kubernetes Manifest Tokens
+          uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: '_{_'
+            tokenSuffix: '_}_'
+            files: 'kubernetes/development/*.yaml' # Path to your k8s files
+          env:
+            NAMESPACE: ${{ vars.ENV }}
+            REPLICAS: ${{ vars.REPLICAS }}
+
+        - name: check content on rewrite
+          run: |
+            cat /kubernetes/development/deployment.yaml
+
+
 
         # - name: check config file
         #   run: |
@@ -132,6 +147,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
