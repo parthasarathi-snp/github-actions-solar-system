@@ -142,7 +142,13 @@ jobs:
           run: |
             cat kubernetes/test/deployment.yaml
 
-
+        # 5. Deploy to the cluster
+        - name: Deploy to AKS
+          uses: azure/k8s-deploy@v5
+          with:
+            action: deploy
+            manifests: |
+              kubernetes/test/deployment.yaml
 
         # - name: check config file
         #   run: |
@@ -151,6 +157,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
