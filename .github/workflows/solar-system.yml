@@ -133,7 +133,7 @@ jobs:
             tokenPrefix: '_{_'
             tokenSuffix: '_}_'
             #files: 'kubernetes/test/*.yaml' # Path to your k8s files
-            files: 'kubernetes/development/*.yaml'
+            files: 'kubernetes/test/*.yaml'
           env:
             NAMESPACE: ${{ vars.ENV }}
             REPLICAS: ${{ vars.REPLICAS }}
@@ -141,7 +141,7 @@ jobs:
 
         - name: check content on rewrite
           run: |
-            cat kubernetes/development/deployment.yaml
+            cat kubernetes/test/deployment.yaml
 
         # 5. Deploy to the cluster
         - name: Deploy to AKS
@@ -149,7 +149,7 @@ jobs:
           with:
             action: deploy
             manifests: |
-              kubernetes/development/
+              kubernetes/test/
 
         # - name: check config file
         #   run: |
@@ -158,6 +158,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
