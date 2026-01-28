@@ -37,7 +37,7 @@ jobs:
       runs-on: ubuntu-latest
 
       environment:
-        name: dev
+        name: test
       
       permissions:
             contents: write
@@ -161,6 +161,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
