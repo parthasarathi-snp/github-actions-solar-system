@@ -116,43 +116,47 @@ jobs:
         - name: check kubectl installation and vesion
           run: kubectl version --client
 
+        - name: test-kt
+          run: |
+            echo " this is for kt pipeline"
+
         
-        - name: Configure Kubeconfig
-          uses: azure/k8s-set-context@v3
-          with:
-            method: kubeconfig
-            kubeconfig: ${{ secrets.CLUSTER }}
+        # - name: Configure Kubeconfig
+        #   uses: azure/k8s-set-context@v3
+        #   with:
+        #     method: kubeconfig
+        #     kubeconfig: ${{ secrets.CLUSTER }}
 
-        - name: Verify cluster access
-          run: |
-            kubectl get node
+        # - name: Verify cluster access
+        #   run: |
+        #     kubectl get node
 
-        - name: Checkout Repository
-          uses: actions/checkout@v4
+        # - name: Checkout Repository
+        #   uses: actions/checkout@v4
 
-        - name: Replace Kubernetes Manifest Tokens
-          uses: cschleiden/replace-tokens@v1
-          with:
-            tokenPrefix: '_{_'
-            tokenSuffix: '_}_'
-            #files: 'kubernetes/test/*.yaml' # Path to your k8s files
-            files: 'kubernetes/test/*.yaml'
-          env:
-            NAMESPACE: ${{ vars.ENV }}
-            REPLICAS: ${{ vars.REPLICAS }}
-            IMAGE: ${{ vars.IMAGE }}
+        # - name: Replace Kubernetes Manifest Tokens
+        #   uses: cschleiden/replace-tokens@v1
+        #   with:
+        #     tokenPrefix: '_{_'
+        #     tokenSuffix: '_}_'
+        #     #files: 'kubernetes/test/*.yaml' # Path to your k8s files
+        #     files: 'kubernetes/test/*.yaml'
+        #   env:
+        #     NAMESPACE: ${{ vars.ENV }}
+        #     REPLICAS: ${{ vars.REPLICAS }}
+        #     IMAGE: ${{ vars.IMAGE }}
 
-        - name: check content on rewrite
-          run: |
-            cat kubernetes/test/deployment.yaml
+        # - name: check content on rewrite
+        #   run: |
+        #     cat kubernetes/test/deployment.yaml
 
-        # 5. Deploy to the cluster
-        - name: Deploy to AKS
-          uses: azure/k8s-deploy@v5
-          with:
-            action: deploy
-            manifests: |
-              kubernetes/test/
+        # # 5. Deploy to the cluster
+        # - name: Deploy to AKS
+        #   uses: azure/k8s-deploy@v5
+        #   with:
+        #     action: deploy
+        #     manifests: |
+        #       kubernetes/test/
 
         # - name: check config file
         #   run: |
@@ -161,6 +165,7 @@ jobs:
 
         # - name: check connectivity to cluster
         #   run: kubectl get no
+
 
 
 
